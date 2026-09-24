@@ -92,11 +92,6 @@ def init_db(path="steam.db"):
     conn = sqlite3.connect(path)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS player_counts (
-            ...
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS player_counts (
             id           INTEGER PRIMARY KEY,
             app_id       INTEGER NOT NULL,
             game_name    TEXT    NOT NULL,
@@ -104,6 +99,12 @@ def init_db(path="steam.db"):
             fetched_at   TEXT    NOT NULL,
             status       TEXT    NOT NULL
         )
+    """)
+    conn.execute("""
+        CREATE VIEW IF NOT EXISTS player_counts_local AS
+        SELECT id, app_id, game_name, player_count, status,
+               datetime(fetched_at, '+8 hours') AS local_time
+        FROM player_counts
     """)
     conn.commit()
     return conn
