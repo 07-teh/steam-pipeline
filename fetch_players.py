@@ -92,6 +92,11 @@ def init_db(path="steam.db"):
     conn = sqlite3.connect(path)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS player_counts (
+            ...
+        )
+    """)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS player_counts (
             id           INTEGER PRIMARY KEY,
             app_id       INTEGER NOT NULL,
             game_name    TEXT    NOT NULL,
