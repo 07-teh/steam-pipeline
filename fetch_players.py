@@ -1,12 +1,14 @@
-"""抓取 Steam 上一批游戏的当前在线人数,打印到终端。
+"""抓取 Steam 上一批游戏的当前在线人数,存进 steam.db。
 
 用法: python fetch_players.py
+全部游戏都没抓到数据时以退出码 1 结束,让 GitHub Actions 标红。
 """
 
 import time
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 import sqlite3
+import sys
 
 import requests
 
@@ -87,6 +89,9 @@ def main():
 
     conn.commit()
     conn.close()
+
+    if ok == 0:
+        sys.exit(1)
     
 def init_db(path="steam.db"):
     conn = sqlite3.connect(path)
