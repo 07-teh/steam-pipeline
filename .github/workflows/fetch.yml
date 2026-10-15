@@ -2,7 +2,9 @@ name: Fetch Steam player counts
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "13 0-23/3 1-31/3 * *"
+    - cron: "13 1-23/3 2-31/3 * *"
+    - cron: "13 2-23/3 3-31/3 * *"
   workflow_dispatch:
 
 permissions:
