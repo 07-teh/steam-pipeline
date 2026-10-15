@@ -1,5 +1,7 @@
 # Steam 游戏在线人数抓取
 
+[English](README.md) | **中文**
+
 这是一个通过 GitHub Actions 自动运行的 Steam 游戏在线人数抓取脚本(每 3 小时一次,每 3 天覆盖一天中的全部 24 个小时),利用 SQLite 存储数据。
 
 [![Fetch Steam player counts](https://github.com/07-teh/steam-pipeline/actions/workflows/fetch.yml/badge.svg)](https://github.com/07-teh/steam-pipeline/actions/workflows/fetch.yml)
@@ -24,6 +26,8 @@
    - 重试后仍然失败:status 记为 `failed`,人数留空。
 6. 每处理完一款游戏,休息 1 秒,避免请求过密。
 7. 全部处理完后,Actions 把更新后的 `steam.db` 提交回仓库,然后关闭虚拟机。
+
+如果所有游戏都抓取失败,脚本会以退出码 1 结束,Actions 显示为失败,GitHub 会发邮件通知。失败的记录照样会提交。
 
 ## 本地运行
 
